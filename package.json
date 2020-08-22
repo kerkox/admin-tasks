@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "nodemon dist/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Paul Cortes",
   "license": "MIT",
   "dependencies": {
+    "@types/mongoose": "^5.7.36",
     "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

@@ -1,36 +1,18 @@
 import mongoose from 'mongoose';
 
-export interface IUser extends mongoose.Document {
-  name: string;
-  somethingElse?: number;
+export interface ITask extends mongoose.Document {
+  description: string;
+  priority: number;
+  dueData: Date;
 };
 
-export const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  somethingElse: Number,
+export const TaskSchema = new mongoose.Schema({
+  description: { type: String, required: true },
+  priority: { type: Number, required: true },
+  dueData: { type: Date, required: true }
+
 });
 
-const User = mongoose.model<IUser>('User', UserSchema);
-export default User;
+const Task = mongoose.model<ITask>('Task', TaskSchema);
 
-
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-
-let taskSchema = new Schema({
-  descripcion: {
-    type: String,
-    unique: true,
-    required: [true, "La descripcion de la task es requerida"]
-  },
-  usuario: {
-    type: Schema.Types.ObjectId,
-    ref: 'Usuario'
-  },
-  deleted_at: {
-    type: Date,
-    default: null
-  }
-})
-
-module.exports = mongoose.model('Task', taskSchema);
+export default Task;

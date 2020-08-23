@@ -8,11 +8,26 @@ export interface IUser extends mongoose.Document {
   password: number;
 };
 const saltRounds = 10;
+const validateEmail = function (email: string) {
+  const regExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+  return regExp.test(email);
+}
 
 export const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, unique: true, required: true },
-  password: { type: Number, required: [true, "The password is mandatory"] },
+  name: { type: String, required: true, trim: true },
+  email: {
+    type: String,
+    trim: true,
+    unique: true,
+    lowercase: true,
+    required: true,
+    validate: [validateEmail, 'Please input a valid email'],
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/]
+  },
+  password: {
+    type: Number,
+    required: [true, "The password is mandatory"]
+  },
 
 });
 // Hide password
@@ -25,7 +40,7 @@ UserSchema.methods.toJSON = function () {
 
 // Hash password
 UserSchema.pre('save', function (next) {
-  if (this.isModified('password')) {
+  if (this.isModified('password') && this.hasOwnProperty('password')) {
     this.password = bcrypt.hashSync(this.password, saltRounds)
   }
   next();

@@ -1,5 +1,5 @@
 import Server from './server/server';
-import Router from './routes/api/index';
+import router from './routes/api/indexRoute';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose'
 require('dotenv').config();
@@ -8,7 +8,7 @@ const port = Number(process.env.PORT) || 3000;
 const server = Server.init(port);
 server.app.use(bodyParser.urlencoded({ extended: false }))
 server.app.use(bodyParser.json())
-server.app.use(Router);
+server.app.use(router);
 
 const mongodbURI = process.env.MOGO_URI || 'mongodb://localhost/tasks'
 mongoose.connect(mongodbURI,

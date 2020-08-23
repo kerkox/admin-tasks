@@ -15,7 +15,7 @@ const utils = {
         error,
       })
     }
-    res.json({
+    return res.json({
       ok: true,
       data: model
     })

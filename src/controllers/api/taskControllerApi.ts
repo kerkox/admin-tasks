@@ -19,7 +19,7 @@ const taskControllerApi = {
       return utils.response(err, taskDB, res)
     })
   },
-  tasks_udpate: (req: Request, res: Response) => {
+  tasks_update: (req: Request, res: Response) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['description', 'priority', 'dueDate'])
     Task.findByIdAndUpdate(id, body,

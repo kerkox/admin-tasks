@@ -1,9 +1,11 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 
-import task from './task';
+import taskRoute from './taskRoute';
+import userRoute from './userRoute';
 
 const router = Router();
 
-router.use(task);
+router.use(taskRoute);
+router.use(userRoute);
 
 export default router;

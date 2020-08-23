@@ -3,13 +3,13 @@ import mongoose from 'mongoose';
 export interface ITask extends mongoose.Document {
   description: string;
   priority: number;
-  dueData: Date;
+  dueDate: Date;
 };
 
 export const TaskSchema = new mongoose.Schema({
   description: { type: String, required: true },
   priority: { type: Number, required: true },
-  dueData: { type: Date, required: true }
+  dueDate: { type: Date, required: true }
 
 });
 

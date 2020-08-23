@@ -1,12 +1,10 @@
 import Task from '../../models/task';
 import { Request, Response } from 'express'
+import utils from '../../utils/utils';
 const taskControllerApi = {
   tasks_list: (req: Request, res: Response) => {
     Task.find({}, (err, tasks) => {
-      res.json({
-        ok: true,
-        tasks
-      });
+      return utils.response(err, tasks, res)
     })
   },
   tasks_create: (req: Request, res: Response) => {
@@ -17,22 +15,7 @@ const taskControllerApi = {
       dueDate: body.dueDate
     })
     task.save((err, taskDB) => {
-      if (err) {
-        return res.status(500).json({
-          ok: false,
-          err
-        })
-      }
-      if (!taskDB) {
-        return res.status(400).json({
-          ok: false,
-          err,
-        })
-      }
-      res.json({
-        ok: true,
-        task: taskDB
-      })
+      return utils.response(err, taskDB, res)
     })
 
   }

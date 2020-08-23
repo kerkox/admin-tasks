@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "start": "nodemon dist/index",
+    "dev": "nodemon dist/index",
+    "start": "node dist/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Paul Cortes",

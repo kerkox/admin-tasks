@@ -28,6 +28,12 @@ const taskControllerApi = {
         return utils.response(err, taskDB, res, { message: "The ID doesn't exists" })
       })
   },
+  tasks_delete: (req: Request, res: Response) => {
+    let id = req.params.id;
+    Task.findByIdAndRemove(id, (err, task) => {
+      return utils.response(err, { message: 'Task deleted successfuly' }, res)
+    })
+  }
 }
 
 export default taskControllerApi;

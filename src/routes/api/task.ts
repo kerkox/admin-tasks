@@ -6,6 +6,7 @@ const router = Router();
 router.get('/tasks', taskControllerApi.tasks_list)
 router.post('/tasks', taskControllerApi.tasks_create)
 router.put('/tasks/:id', taskControllerApi.tasks_udpate)
+router.delete('/tasks/:id', taskControllerApi.tasks_delete)
 
 
 

@@ -19,7 +19,11 @@ const utils = {
       ok: true,
       data: model
     })
+  },
+  validateErrors: (err: any, model: any, res: Response, messageError?: any) => {
+
   }
+
 }
 
 export default utils

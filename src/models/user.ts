@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 export interface IUser extends mongoose.Document {
   name: string;
   email: string;
-  password: number;
+  password: String;
 };
 const saltRounds = 10;
 const validateEmail = function (email: string) {
@@ -25,7 +25,7 @@ export const UserSchema = new mongoose.Schema({
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/]
   },
   password: {
-    type: Number,
+    type: String,
     required: [true, "The password is mandatory"]
   },
 
@@ -39,9 +39,11 @@ UserSchema.methods.toJSON = function () {
 }
 
 // Hash password
-UserSchema.pre('save', function (next) {
-  if (this.isModified('password') && this.hasOwnProperty('password')) {
-    this.password = bcrypt.hashSync(this.password, saltRounds)
+UserSchema.pre('save', function (this: IUser, next: any) {
+  if (this.isModified('password')) {
+    console.log("this before", this)
+    this.password = bcrypt.hashSync(this.password, saltRounds);
+    console.log("this after", this)
   }
   next();
 })

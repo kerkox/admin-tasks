@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 export interface IUser extends mongoose.Document {
   name: string;
   email: string;
-  password: String;
+  password: string;
 };
 const saltRounds = 10;
 const validateEmail = function (email: string) {
